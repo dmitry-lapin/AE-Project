@@ -1,87 +1,63 @@
 import React, { useState } from "react";
 
-const FilterComponent = () => {
-  const [selectedParameter, setSelectedParameter] = useState(""); 
-  const [selectedComparison, setSelectedComparison] = useState(""); 
-  const [inputValue, setInputValue] = useState(""); 
+const FilterComponent = ({ onAddFilter }) => {
+  const [filter, setFilter] = useState({
+    key: "",
+    comparison: "",
+    value: "",
+  });
 
-  const parameters = ["Name", "Age", "Gender"]; 
-
-  const comparisons = {
-    Name: ["="],
-    Age: [">", "<"], 
-    Gender: ["="], 
+  const handleInputChange = (e) => {
+    const { name, value } = e.target;
+    setFilter({
+      ...filter,
+      [name]: value,
+    });
   };
 
-  const handleParameterChange = (e) => {
-    setSelectedParameter(e.target.value);
-    setSelectedComparison("");
-    setInputValue("");
+  const handleAddFilter = () => {
+    if (filter.key && filter.comparison && filter.value) {
+      onAddFilter(filter);
+      setFilter({
+        key: "",
+        comparison: "",
+        value: "",
+      });
+    }
   };
 
   return (
-    <div className="rounded p-4 border">
-      <h2 className="text-xl font-semibold mb-2">Filter generator</h2>
-      <div className="mb-2">
-        <label htmlFor="parameter" className="mr-2">
-          Choose Parameter
-        </label>
-        <select
-          id="parameter"
-          value={selectedParameter}
-          onChange={handleParameterChange}
-          className="px-2 py-1 border rounded"
-        >
-          <option value="">Choose Parameter</option>
-          {parameters.map((param) => (
-            <option key={param} value={param}>
-              {param}
-            </option>
-          ))}
-        </select>
-      </div>
-      {selectedParameter && (
-        <div className="mb-2">
-          <label htmlFor="comparison" className="mr-2">
-            Choose comparsion option:
-          </label>
-          <select
-            id="comparison"
-            value={selectedComparison}
-            onChange={(e) => setSelectedComparison(e.target.value)}
-            className="px-2 py-1 border rounded"
-          >
-            <option value="">Выберите опцию</option>
-            {comparisons[selectedParameter].map((comp) => (
-              <option key={comp} value={comp}>
-                {comp}
-              </option>
-            ))}
-          </select>
-        </div>
-      )}
-      {selectedComparison && (
-        <div className="mb-2">
-          <label htmlFor="value" className="mr-2">
-            Enter value: 
-          </label>
-          <input
-            type="text"
-            id="value"
-            value={inputValue}
-            onChange={(e) => setInputValue(e.target.value)}
-            className="px-2 py-1 border rounded"
-            placeholder="Введите значение"
-          />
-        </div>
-      )}
-      {selectedParameter && selectedComparison && inputValue && (
-        <div>
-          <p>Selected param: {selectedParameter}</p>
-          <p>Selected comparsion option: {selectedComparison}</p>
-          <p>selected value: {inputValue}</p>
-        </div>
-      )}
+    <div className="filter-generator space-x-2">
+      <input
+        type="text"
+        name="key"
+        value={filter.key}
+        onChange={handleInputChange}
+        placeholder="Key"
+        className="p-1 border rounded focus:outline-none focus:border-blue-500"
+      />
+      <select
+        name="comparison"
+        value={filter.comparison}
+        onChange={handleInputChange}
+        className="p-1 border rounded focus:outline-none focus:border-blue-500"
+      >
+        <option value="=">=</option>
+        <option value="!=">!=</option>
+        <option value="&gt;">&gt;</option>
+        <option value="&lt;">&lt;</option>
+      </select>
+      <input
+        type="text"
+        name="value"
+        value={filter.value}
+        onChange={handleInputChange}
+        placeholder="Value"
+        className="p-1 border rounded focus:outline-none focus:border-blue-500"
+      />
+      <button onClick={handleAddFilter} className="px-3 py-1 bg-blue-500 text-white rounded">
+        Add filter
+      </button>
     </div>
   );
 };
