@@ -1,12 +1,15 @@
-import React, { useState } from "react";
+import React from "react";
+
+import { useDispatch } from "react-redux";
+import { addFilter } from "../slices/filtersSlice";
+
 import FilterComponent from "./FilterComponent";
 
 const FiltersField = () => {
-    const [filters, setFilters] = useState([]);
+    const dispatch = useDispatch();
 
     const handleAddFilter = (filter) => {
-        //callback action to add new filters in filters state. 
-        setFilters([...filters, filter]);
+        dispatch(addFilter(filter)); 
     };
 
     return(
