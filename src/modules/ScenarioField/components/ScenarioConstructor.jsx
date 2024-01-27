@@ -2,11 +2,11 @@ import React from "react";
 import DragndropImage from '../../../media/dragndrop.png';
 import { useDrop } from "react-dnd";
 
-const ScenarioConstructor = ({ onDrop }) => {
+const ScenarioConstructor = () => {
     const [, ref] = useDrop({
         accept: "BLOCK",
         drop: (item) => {
-          onDrop(item);
+          console.log(item);
         },
       });
 

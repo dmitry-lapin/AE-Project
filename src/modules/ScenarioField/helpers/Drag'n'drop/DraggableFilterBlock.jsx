@@ -14,6 +14,7 @@ const DraggableFilterBlock = ({ filter }) => {
     end: (item, monitor) => {
       const dropResult = monitor.getDropResult();
       if (dropResult) {
+        console.log(dropResult);
       }
     },
   });
