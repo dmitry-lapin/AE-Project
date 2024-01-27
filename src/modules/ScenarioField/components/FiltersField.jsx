@@ -15,7 +15,7 @@ const FiltersField = () => {
 
     return(
         <ComponentWrapper header="Create your filter">
-            <div className="p-3 flex-1 bg-zinc-200 border border-zinc-300 rounded shadow-sm">
+            <div className="p-3 flex-1 bg-zinc-200 border border-zinc-300 rounded-lg shadow-sm">
                 <FilterComponent onAddFilter={handleAddFilter}/>
             </div>
         </ComponentWrapper>

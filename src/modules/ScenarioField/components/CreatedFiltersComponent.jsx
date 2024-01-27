@@ -1,20 +1,17 @@
 import React from "react";
 import { useSelector } from "react-redux";
-import ComponentWrapper from "../helpers/ComponentWrapper";
-import FilterBlock from "../helpers/FilterBlock"; 
+import DraggableFilterBlock from "../helpers/Drag'n'drop/DraggableFilterBlock";
 
-const CreatedFiltersComponent = () => {
+const FiltersField = () => {
   const filters = useSelector((state) => state.filters);
 
   return (
-    <ComponentWrapper header="Ready-to-use filters">
-        <div className="grid grid-cols-3 gap-4 p-3 bg-zinc-200 border border-zinc-300 rounded shadow-sm">
-            {filters.map((filter, index) => (
-              <FilterBlock key={index} filter={filter} />
-            ))}
-      </div>
-    </ComponentWrapper>
+    <div className="mx-3 grid grid-cols-3 gap-4 p-3 bg-zinc-200 border border-zinc-300 rounded-lg shadow-sm">
+      {filters.map((filter, index) => (
+        <DraggableFilterBlock key={index} filter={filter} />
+      ))}
+    </div>
   );
 };
 
-export default CreatedFiltersComponent;
+export default FiltersField;
