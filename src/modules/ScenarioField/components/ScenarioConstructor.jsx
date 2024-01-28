@@ -6,30 +6,46 @@ import { addFilter, removeFilter } from '../slices/CurrentScenarioSlice';
 
 const ScenarioConstructor = () => {
     const dispatch = useDispatch();
+    const filters = useSelector((state) => state.currentScenario);
 
-    const [, ref] = useDrop({
+    const [{ canDrop, isOver }, ref] = useDrop({
         accept: "BLOCK",
         drop: (item) => {
            item = item.filter;
           dispatch(addFilter(item));
         },
+        collect: (monitor) => ({
+            isOver: monitor.isOver(),
+            canDrop: monitor.canDrop(),
+        })
       });
 
-    const filters = useSelector((state) => state.currentScenario);
+    const handleRemoveClick = (index) => {
+        dispatch(removeFilter(index));
+    }
+
+    const isActive = canDrop && isOver;
+    let backgroundColor = `bg-gray-200 border-gray-400 shadow-sm`
+    if (isActive) {
+      backgroundColor = `bg-gray-300 border-gray-500 shadow-lg`
+    } else if (canDrop) {
+      backgroundColor = `bg-gray-300 border-gray-500 shadow-md`
+    }
 
     return (
-        <div ref={ref} className="bg-zinc-200 border border-dashed border-zinc-400 mx-3 rounded-lg shadow-sm duration-150">
+        <div ref={ref} className={` border border-dashed  mx-3 rounded-lg shadow-sm duration-100 ` + backgroundColor}>
             {filters.length === 0 ? (
                 <div className="flex flex-col items-center py-16 space-y-3">
                     <img src={DragndropImage} alt="drag'n'drop"/>
                     <p className="font-normal text-lg text-zinc-600">Drop your first <span className="font-bold">filter</span> here.</p>
                 </div>
             ) : (
-                <div className="grid grid-cols-4 grid-flow-row gap-4">
+                <div className="grid grid-cols-5 grid-flow-row gap-3 p-4 font-normal">
                     {filters.map((filter, index) => (
-                        <div key={index} className="bg-zinc-200 border border-zinc-400 rounded p-2 m-2">
-                            {`${filter.key} ${filter.comparison} ${filter.value}`}
-                        </div>
+                        <button key={index} className=" relative bg-white border border-gray-300 shadow-md rounded-full duration-100 py-2 overflow-hidden" onClick={() => handleRemoveClick(index)}>
+                        {`${filter.key} ${filter.comparison} ${filter.value}`}
+                        <span className=" absolute inset-0 flex items-center justify-center text-transparent transition duration-100 ease-in-out hover:text-red-500 hover:opacity-100 hover:bg-red-100">Delete ?</span>
+                    </button>
                     ))}
                 </div>
             )}

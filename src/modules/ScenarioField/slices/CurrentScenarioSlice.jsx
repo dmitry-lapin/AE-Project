@@ -8,7 +8,7 @@ const selectedFiltersSlice = createSlice({
       state.push(action.payload);
     },
     removeFilter: (state, action) => {
-      return state.filter(filter => filter.id !== action.payload.id);
+      state.splice(action.payload, 1);
     },
   },
 });
