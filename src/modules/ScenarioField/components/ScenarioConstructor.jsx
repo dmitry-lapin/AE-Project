@@ -19,16 +19,20 @@ const ScenarioConstructor = () => {
 
     return (
         <div ref={ref} className="bg-zinc-200 border border-dashed border-zinc-400 mx-3 rounded-lg shadow-sm duration-150">
-            <div className="flex flex-col items-center py-16 space-y-3">
-                <img src={DragndropImage} alt="drag'n'drop"/>
-                <p className="font-normal text-lg text-zinc-600">Drop your first <span className="font-bold">filter</span> here.</p>
-                {/* Отображаем фильтры */}
-                {filters.map((filter, index) => (
-                    <div key={index} className="bg-zinc-200 border border-zinc-400 rounded p-2 m-2">
-                        {`${filter.key} ${filter.comparison} ${filter.value}`}
-                    </div>
-                ))}
-            </div>
+            {filters.length === 0 ? (
+                <div className="flex flex-col items-center py-16 space-y-3">
+                    <img src={DragndropImage} alt="drag'n'drop"/>
+                    <p className="font-normal text-lg text-zinc-600">Drop your first <span className="font-bold">filter</span> here.</p>
+                </div>
+            ) : (
+                <div className="grid grid-cols-4 grid-flow-row gap-4">
+                    {filters.map((filter, index) => (
+                        <div key={index} className="bg-zinc-200 border border-zinc-400 rounded p-2 m-2">
+                            {`${filter.key} ${filter.comparison} ${filter.value}`}
+                        </div>
+                    ))}
+                </div>
+            )}
         </div>
     );
 }
