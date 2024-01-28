@@ -11,7 +11,7 @@ const FilterBlock = ({ filter }) => {
 
 
   return (
-    <div ref={ref} style={{cursor: "grab"}} className="p-3 bg-zinc-200 border border-zinc-300 rounded shadow-sm overflow-hidden">
+    <div ref={ref} style={{cursor: "grab"}} className="p-3 bg-gray-100 border border-zinc-200 rounded-full shadow-sm overflow-hidden hover:bg-gray-200 duration-100">
       <p className="text-black text-center" style={{ whiteSpace: "nowrap", overflow: "hidden" }}>
         <span ref={textRef}>
           {filter.key} {filter.comparison} {filter.value}
