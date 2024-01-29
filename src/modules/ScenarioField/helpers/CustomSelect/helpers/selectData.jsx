@@ -18,15 +18,9 @@ const groupedOptions = [
     {
       label: "String",
       options: [
-        { value: "searchIn", label: "Search" },
+        { value: "search", label: "search" },
       ],
     },
-    {
-        label: "Not a number check(NaN)",
-        options: [
-          { value: "isNaN", label: "isNaN" },
-        ],
-      },
   ];
 
   export default groupedOptions;
