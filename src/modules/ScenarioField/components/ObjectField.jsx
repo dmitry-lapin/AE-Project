@@ -5,12 +5,6 @@ const ObjectField = () => {
   const [jsonObject, setJsonObject] = useState(null);
   const currentScenario = useSelector((state) => state.currentScenario);
 
-  useEffect(() => {
-    if (jsonObject) {
-      applyFilters(currentScenario, jsonObject);
-    }
-  }, [jsonObject, currentScenario]);
-
   const handleFileUpload = (event) => {
     const file = event.target.files[0];
     if (file) {
@@ -27,34 +21,6 @@ const ObjectField = () => {
       reader.readAsText(file);
     }
   };
-
-  const applyFilters = (filters, json) => {
-    let filteredJson = [...json];
-  
-    filters.forEach((filter) => {
-      const { key, comparison, value } = filter;
-
-      filteredJson = filteredJson.filter((item) => {
-        const itemValue = item[key]; 
-  
-        switch (comparison) {
-          case "=":
-            return itemValue === value;
-          case "!=":
-            return itemValue !== value;
-          case ">":
-            return itemValue > value;
-          case "<":
-            return itemValue < value;
-          default:
-            return true;
-        }
-      });
-    });
-  
-    console.log(filteredJson);
-  };
-  
 
   return (
     <div className="flex flex-col w-5/12 space-y-2">
