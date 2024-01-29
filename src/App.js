@@ -5,7 +5,7 @@ import FiltersEditor from './modules/ScenarioField/ProductionField';
 function App() {
   return (
     <div className="App flex h-screen bg-zinc-100">
-        <Header />
+
         <div className='flex-1'>
           <FiltersEditor />
         </div>

@@ -8,13 +8,15 @@ import JsonViewer from "./components/ObjectField";
 
 import LogComponent from "./components/LogComponent";
 
+import ComponentWrapper from "./helpers/ComponentWrapper";
+
 const ProductionField = () => {
 
 
     return (
       <div className="space-y-5">
         <div className="bg-zinc-200 border-b border-zinc-300 p-5 font-semibold text-lg ">
-            <p className="text-black">Edit your scenario</p>
+            <p className="text-black">SCENARIO CONSTRUCTOR</p>
         </div>
         <div className="flex justify-between px-3">
           <ScenarioConstructor/>
@@ -26,7 +28,9 @@ const ProductionField = () => {
           <JsonViewer />
         </div>
         <FiltersField />
-        <CreatedFiltersComponent />
+        <ComponentWrapper header={"Ready-to-use filters"}>
+          <CreatedFiltersComponent />
+        </ComponentWrapper>
         <LogComponent />
       </div>
     );

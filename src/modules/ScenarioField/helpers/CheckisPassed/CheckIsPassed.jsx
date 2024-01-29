@@ -1,5 +1,23 @@
 // Function to apply a filter to JSON and return the result true or false
 
+// Функция для рекурсивного поиска ключа и значения в JSON-объекте
+const searchInJSON = (json, searchKey, searchValue) => {
+  for (const key in json) {
+    if (key === searchKey && json[key].toString().toLowerCase().includes(searchValue.toLowerCase())) {
+      return true; // Найдено совпадение
+    }
+
+    if (typeof json[key] === "object" && !Array.isArray(json[key])) {
+      // Рекурсивно ищем во вложенных объектах
+      if (searchInJSON(json[key], searchKey, searchValue)) {
+        return true; // Найдено совпадение во вложенных объектах
+      }
+    }
+  }
+
+  return false; // Совпадение не найдено
+};
+
 export const applyFilter = (json, filter) => {
     const { key, comparison, value } = filter;
   
@@ -9,6 +27,11 @@ export const applyFilter = (json, filter) => {
     }
   
     const jsonValue = json[key];
+
+    if (key === "searchIn") {
+      // Если ключ "searchIn", выполняем поиск в JSON-объекте
+      return searchInJSON(jsonValue, key, value);
+    }
   
     switch (comparison) {
       case '==':

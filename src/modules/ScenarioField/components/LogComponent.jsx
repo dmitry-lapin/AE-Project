@@ -1,19 +1,36 @@
-import React, { useState } from "react";
+import React from "react";
 import { useSelector } from "react-redux";
 
 const LogComponent = () => {
   const testResults = useSelector((state) => state.testResultsSlice);
 
-  // Создаем состояние для отслеживания свернутых/развернутых строк
-  const [expandedRows, setExpandedRows] = useState([]);
+  // Function to generate a text file for a specific test
+  const generateTextFileForTest = (testIndex) => {
+    const result = testResults[testIndex];
+    const textData = `
+                      Test ${testIndex + 1}:
+                      Filters Used:
+                      ${JSON.stringify(result.filtersUsed, null, 2)}
 
-  // Функция для обработки клика на кнопке разворачивания/сворачивания строки
-  const toggleRow = (index) => {
-    if (expandedRows.includes(index)) {
-      setExpandedRows(expandedRows.filter((rowIndex) => rowIndex !== index));
-    } else {
-      setExpandedRows([...expandedRows, index]);
-    }
+                      JSON Used:
+                      ${JSON.stringify(result.jsonUsed, null, 2)}
+
+                      Test Passed:
+                      ${JSON.stringify(result.testPassed, null, 2)}
+                    `;
+
+    // Create a Blob object and a URL for downloading a text file
+    const blob = new Blob([textData], { type: "text/plain" });
+    const url = URL.createObjectURL(blob);
+
+    // Create a link to download the file
+    const a = document.createElement("a");
+    a.href = url;
+    a.download = `test_result_${testIndex + 1}.txt`;
+    a.click();
+
+    // Cleaning up the URL
+    URL.revokeObjectURL(url);
   };
 
   return (
@@ -22,50 +39,33 @@ const LogComponent = () => {
       <table className="min-w-full divide-y divide-gray-200">
         <thead className="bg-gray-100">
           <tr>
-            <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
-              Filters Used
-            </th>
-            <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
-              JSON Used
+            <th className="py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
+              Index
             </th>
             <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
               Test Passed
+            </th>
+            <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
+              Download Info
             </th>
           </tr>
         </thead>
         <tbody className="bg-white divide-y divide-gray-200">
           {testResults.map((result, index) => (
-            <React.Fragment key={index}>
-              <tr>
-                <td className="px-6 py-4 whitespace-nowrap">
-                  <button
-                    className="text-blue-500"
-                    onClick={() => toggleRow(index)}
-                  >
-                    {expandedRows.includes(index) ? "Свернуть" : "Развернуть"}
-                  </button>
-                </td>
-                <td className="px-6 py-4 whitespace-nowrap">
-                  <pre>{JSON.stringify(result.filtersUsed, null, 2)}</pre>
-                </td>
-                <td className="px-6 py-4 whitespace-nowrap">
-                  {expandedRows.includes(index) ? (
-                    <pre>{JSON.stringify(result.jsonUsed, null, 2)}</pre>
-                  ) : (
-                    <p>{result.testPassed.every((passed) => passed) ? "Пройден" : "Не пройден"}</p>
-                  )}
-                </td>
-              </tr>
-              {expandedRows.includes(index) && (
-                <tr>
-                  <td colSpan="3">
-                    <div className="px-6 py-4 whitespace-nowrap">
-                      {/* Дополнительные детали, которые будут отображены при разворачивании строки */}
-                    </div>
-                  </td>
-                </tr>
-              )}
-            </React.Fragment>
+            <tr key={index}>
+              <td className="px-6 py-4 whitespace-nowrap">{index + 1}</td>
+              <td className="px-6 py-4 whitespace-nowrap">
+                {result.testPassed.every((pass) => pass) ? "Passed" : "Failed"}
+              </td>
+              <td className="px-6 py-4 whitespace-nowrap">
+                <button
+                  className="bg-blue-500 hover:bg-blue-600 text-white font-semibold py-2 px-4 rounded-full"
+                  onClick={() => generateTextFileForTest(index)}
+                >
+                  Download
+                </button>
+              </td>
+            </tr>
           ))}
         </tbody>
       </table>
