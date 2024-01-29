@@ -6,7 +6,7 @@ import { addFilter, removeFilter } from '../slices/CurrentScenarioSlice';
 
 const ScenarioConstructor = () => {
     const dispatch = useDispatch();
-    const filters = useSelector((state) => state.currentScenario);
+    const filters = useSelector((state) => state.currentScenario.filters);
 
     const [{ canDrop, isOver }, ref] = useDrop({
         accept: "BLOCK",

@@ -32,10 +32,9 @@ const FilterComponent = ({ onAddFilter }) => {
 
   const handleAddFilter = () => {
     if (filter.key && filter.comparison && filter.value) {
-      // Проверка наличия первой цифры в поле "Key"
       if (/^\d/.test(filter.key)) {
         setError("Key cannot start with a number");
-        return; // Прекратить добавление фильтра
+        return;
       }
 
       onAddFilter(filter);
