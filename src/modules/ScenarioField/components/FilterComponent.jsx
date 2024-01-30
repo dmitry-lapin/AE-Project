@@ -14,7 +14,7 @@ const FilterComponent = ({ onAddFilter }) => {
   const handleInputChange = (e) => {
     const { name, value } = e.target;
     let trimmedValue = value;
-
+  
     if (name === "key") {
       trimmedValue = value.trim();
       if (/^\d+$/.test(trimmedValue)) {
@@ -22,13 +22,16 @@ const FilterComponent = ({ onAddFilter }) => {
       } else {
         setError(null);
       }
+    } else if (name === "value") {
+      trimmedValue = value.trim(); //remove empties from value.
     }
-
+  
     setFilter({
       ...filter,
       [name]: trimmedValue,
     });
   };
+  
 
   const handleAddFilter = () => {
     if (filter.key && filter.comparison && filter.value) {
