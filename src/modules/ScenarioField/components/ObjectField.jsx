@@ -8,7 +8,7 @@ const ObjectField = () => {
   const [jsonObject, setJsonObject] = useState(null);
   const filters = useSelector((state) => state.currentScenario.filters);
   const dispatch = useDispatch();
-  const [fileInputKey, setFileInputKey] = useState(0); // Добавляем ключ для пересоздания input[type="file"]
+  const [fileInputKey, setFileInputKey] = useState(0); // Add a key to recreate input[type="file"]
 
   const handleFileUpload = (event) => {
     const file = event.target.files[0];
@@ -37,11 +37,11 @@ const ObjectField = () => {
       const results = applyFiltersToJSON(jsonObject, filters);
       console.log(results);
 
-      // Создаем объект с результатом теста и добавляем его в testResultsSlice
+      // Create an object with the test result and add it to testResultsSlice
       const testResult = {
         filtersUsed: filters,
         jsonUsed: jsonObject,
-        testPassed: results // Если все фильтры пройдены
+        testPassed: results // If all filters are passed
       };
 
       dispatch(addTestResult(testResult));
@@ -51,7 +51,7 @@ const ObjectField = () => {
       dispatch(clearJson());
       setJsonObject(null);
 
-      // Увеличиваем ключ для пересоздания input[type="file"]
+      // Increase the key to recreate input[type="file"]
       setFileInputKey((prevKey) => prevKey + 1);
     } else {
       console.log("JSON object or filters are missing.");
@@ -62,7 +62,7 @@ const ObjectField = () => {
     setJsonObject(null);
     dispatch(clearJson());
 
-    // Увеличиваем ключ для пересоздания input[type="file"]
+    // Increase the key to recreate input[type="file"]
     setFileInputKey((prevKey) => prevKey + 1);
   };
 
@@ -76,7 +76,7 @@ const ObjectField = () => {
         </div>
         <div className="flex justify-between mr-6">
           <input
-            key={fileInputKey} // Добавляем ключ для пересоздания input[type="file"]
+            key={fileInputKey} // Add a key to recreate input[type="file"]
             type="file"
             accept=".json"
             onChange={handleFileUpload}

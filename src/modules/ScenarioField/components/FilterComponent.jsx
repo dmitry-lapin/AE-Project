@@ -62,7 +62,7 @@ const FilterComponent = ({ onAddFilter }) => {
             value={filter.key}
             onChange={handleInputChange}
             placeholder="Key"
-            className="w-full p-1.5 border-[1.5px] border-zinc-300 rounded ring-1 ring-transparent focus:ring-blue-500 focus:outline-none focus:border-blue-500"
+            className="w-full px-3 py-1.5 border-[1.5px] border-zinc-300 rounded-lg ring-1 ring-transparent focus:ring-blue-500 focus:outline-none focus:border-blue-500"
           />
         </div>
         <div className="w-3/12">
@@ -87,7 +87,7 @@ const FilterComponent = ({ onAddFilter }) => {
             value={filter.value}
             onChange={handleInputChange}
             placeholder="Value"
-            className="w-full p-1.5 border-[1.5px] border-zinc-300 rounded ring-1 ring-transparent focus:ring-blue-500 focus:outline-none focus:border-blue-500"
+            className="w-full px-3 py-1.5 border-[1.5px] border-zinc-300 rounded-lg ring-1 ring-transparent focus:ring-blue-500 focus:outline-none focus:border-blue-500"
           />
         </div>
         <button

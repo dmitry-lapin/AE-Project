@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import DragndropImage from '../../../media/dragndrop.png';
 import { useDrop } from "react-dnd";
 import { useDispatch, useSelector } from 'react-redux';
@@ -20,6 +20,8 @@ const ScenarioConstructor = () => {
         })
       });
 
+    const [isModalOpen, setIsModalOpen] = useState(false);
+
     const handleRemoveClick = (index) => {
         dispatch(removeFilter(index));
     }
@@ -32,10 +34,31 @@ const ScenarioConstructor = () => {
       backgroundColor = `bg-gray-300 border-gray-500 shadow-md`
     }
 
+    const openModal = () => {
+        setIsModalOpen(true);
+    }
+
+    const closeModal = () => {
+        setIsModalOpen(false);
+    }
+
+    const saveScenario = () => {
+        // Добавьте здесь логику для сохранения сценария
+        // Закройте модальное окно после сохранения
+        setIsModalOpen(false);
+    }
+
     return (
+        <>
         <div className="flex flex-col w-6/12 space-y-2">
-            <div>
-                    <p className="font-semibold text-xl">Construct your scenario below</p>
+            <div className="flex justify-between">
+                <p className="font-semibold text-xl">Construct your scenario below</p>
+                <button className="flex space-x-1 text-white bg-blue-500 rounded-full items-center justify-center px-4 py-1" onClick={openModal}>
+                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" className="w-6 h-6">
+                        <path fillRule="evenodd" d="M12 2.25c-5.385 0-9.75 4.365-9.75 9.75s4.365 9.75 9.75 9.75 9.75-4.365 9.75-9.75S17.385 2.25 12 2.25ZM12.75 9a.75.75 0 0 0-1.5 0v2.25H9a.75.75 0 0 0 0 1.5h2.25V15a.75.75 0 0 0 1.5 0v-2.25H15a.75.75 0 0 0 0-1.5h-2.25V9Z" clipRule="evenodd" />
+                    </svg>
+                    <p className="text-lg">select a file</p>
+                </button>
             </div>
             <div ref={ref} className={`flex-grow border border-dashed rounded-lg duration-100 ` + backgroundColor}>
                 {filters.length === 0 ? (
@@ -54,7 +77,36 @@ const ScenarioConstructor = () => {
                     </div>
                 )}
             </div>
+            <div className="flex justify-end">
+                <button className="text-white bg-blue-500 rounded-full px-4 py-1" onClick={openModal}>
+                    <p>Save a scenario</p>
+                </button>
+            </div>
         </div>
+        {isModalOpen && (
+            <div className="fixed inset-0 flex items-center justify-center z-50 backdrop-blur bg-gray-600/50">
+                <div className="bg-white w-1/4 p-4 rounded-lg shadow-lg">
+                    <p className="text-xl font-semibold">Save Scenario</p>
+                    <p className="text-sm text-zinc-600 mb-4">Select an save option.</p>
+                    <div className="mx-4 space-y-1">
+                        <div className="flex space-x-2 text-white">
+                            <button className="py-2 rounded-xl w-1/2 border-2 border-blue-500 text-blue-500 hover:bg-blue-500 hover:text-white duration-100">
+                                <p>In Database</p>
+                            </button>
+                            <button className="py-2 rounded-xl w-1/2 border-2 border-blue-500 text-blue-500 hover:bg-blue-500 hover:text-white duration-100">
+                                <p>In FIle</p>
+                            </button>
+                        </div>
+                    </div>
+                    <div className="flex justify-end mt-4">
+                        <button className="bg-blue-500 text-white rounded-full px-4 py-1 mr-2" onClick={saveScenario}>Save</button>
+                        <button className="text-blue-500 rounded-full px-4 py-1" onClick={closeModal}>Cancel</button>
+                    </div>
+                </div>
+
+            </div>
+        )}
+        </>
     );
 }
 
