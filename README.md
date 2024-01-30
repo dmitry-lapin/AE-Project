@@ -52,4 +52,59 @@ During the project i used: React(as js framework), Tailwind(to make designing ea
 
 3. For general discussions and questions, use the [Discussions](https://github.com/dmitry-lapin/AE-Project/discussions) section.
 
+
+
+## 🚀 Roadmap for project improvement
+
+I've done a great job on the current version of my project, and now it's time to focus on continually improving it. In this document, we will outline my plans and goals, and describe specific tasks that will help me move forward.
+
+## 🔍 Looking to the future
+Goal: Development of the project in a modern style and improvement of user experience.
+
+### Tasks:
+Design Update:
+
+Study of modern trends in user interface design.
+Design and implementation of updated designs for a more attractive appearance.
+Performance optimization:
+Identify code bottlenecks and optimize to improve performance.
+Implementation of tools for monitoring and analyzing application performance.
+
+Mobile adaptation:
+Refactoring existing code for more mobile display.
+Testing and finalizing the interface for various types of devices.
+
+🚧 Technical debt and maintenance
+Goal: Ensuring stable operation and supporting the latest technologies.
+
+Tasks:
+Update dependencies:
+Periodically update third-party libraries and packages to use the latest versions.
+Automate the dependency update process.
+Code refactoring:
+
+Analysis of the code base for outdated practices and bad patterns.
+Conducted refactorings to improve readability and maintainability.
+Safety:
+
+Conducting security audits and implementing recommendations to protect against known threats.
+Implementation of mechanisms to detect and prevent potential vulnerabilities.
+
+## 🚀 New features and improvements
+Goal: Expanding functionality and meeting user needs.
+
+Tasks:
+Functional additions:
+
+Research user needs and identify possible functional improvements.
+Introducing new features that improve the overall user experience.
+Feedback from users:
+
+Organizing the collection of feedback from users to identify problems and suggestions.
+Regular updates of the project taking into account suggestions and feedback.
+Documentation:
+
+Expansion of documentation to simplify the introduction of new participants into the project.
+Maintaining up-to-date documentation on the current version and changes.
+
 Thanks for your input!
