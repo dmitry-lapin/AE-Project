@@ -1,0 +1,13 @@
+{
+  "files": {
+    "main.css": "/AE-Project/static/css/main.a442681a.css",
+    "main.js": "/AE-Project/static/js/main.9cf6f4ef.js",
+    "index.html": "/AE-Project/index.html",
+    "main.a442681a.css.map": "/AE-Project/static/css/main.a442681a.css.map",
+    "main.9cf6f4ef.js.map": "/AE-Project/static/js/main.9cf6f4ef.js.map"
+  },
+  "entrypoints": [
+    "static/css/main.a442681a.css",
+    "static/js/main.9cf6f4ef.js"
+  ]
+}
