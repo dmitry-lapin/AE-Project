@@ -39,3 +39,17 @@ The repository contains the following files and folders:
 Install the dependencies by running npm install in the project root folder.
 Start the project using the npm start command.
 Open the application in your web browser and start creating, editing and testing scripts.
+
+## Technology stack:
+
+During the project i used: React(as js framework), Tailwind(to make designing easier and better), Redux(for state managment), React Drag'n'drop library(https://react-dnd.github.io/react-dnd/about), React-select(https://react-select.com/home), Jest(for testing), Git/Github(as VCS - version control system), Node.js, webpack(as bundler), and a lot of other side-technologies, which comes in with create-react-app, such as babel, and a lot of others.
+
+## How to contribute
+
+1. If you find a bug or have a suggestion, create a new issue in the [Issues](https://github.com/dmitry-lapin/AE-Project/issues) section.
+
+2. If you have specific changes, create a Pull Request. I am happy to accept any constructive suggestions.
+
+3. For general discussions and questions, use the [Discussions](https://github.com/dmitry-lapin/AE-Project/discussions) section.
+
+Thanks for your input!
