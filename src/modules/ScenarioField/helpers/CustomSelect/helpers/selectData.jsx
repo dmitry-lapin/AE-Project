@@ -18,7 +18,7 @@ const groupedOptions = [
     {
       label: "String",
       options: [
-        { value: "search", label: "search" },
+        { value: "search", label: "contains" },
       ],
     },
   ];

@@ -54,6 +54,12 @@ export const applyFilter = (json, filter) => {
 };
 
 // Function to apply a set of filters to JSON and return an array of results
-export const applyFiltersToJSON = (json, filters) => {
-  return filters.map((filter) => applyFilter(json, filter));
+export const applyFiltersToJSON = (json, filters, isTested = false) => {
+  const results = filters.map((filter) => applyFilter(json, filter));
+
+  if (isTested) {
+    return results.every((result) => result === true);
+  }
+
+  return results;
 };

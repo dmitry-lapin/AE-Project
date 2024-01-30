@@ -1,5 +1,4 @@
 import React, { useState } from "react";
-import DragndropImage from '../../../media/dragndrop.png';
 import { useDrop } from "react-dnd";
 import { useDispatch, useSelector } from 'react-redux';
 import { addFilter, removeFilter, clearFilters } from '../slices/CurrentScenarioSlice';
@@ -123,7 +122,10 @@ const ScenarioConstructor = () => {
         <div ref={ref} className={`flex-grow border border-dashed rounded-lg duration-100 ` + backgroundColor}>
           {filters.length === 0 ? (
             <div className="flex flex-col items-center py-16 space-y-3">
-              <img src={DragndropImage} alt="drag'n'drop"/>
+              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" className="w-20 h-20">
+                <path fillRule="evenodd" d="M11.47 13.28a.75.75 0 0 0 1.06 0l7.5-7.5a.75.75 0 0 0-1.06-1.06L12 11.69 5.03 4.72a.75.75 0 0 0-1.06 1.06l7.5 7.5Z" clipRule="evenodd" />
+                <path fillRule="evenodd" d="M11.47 19.28a.75.75 0 0 0 1.06 0l7.5-7.5a.75.75 0 1 0-1.06-1.06L12 17.69l-6.97-6.97a.75.75 0 0 0-1.06 1.06l7.5 7.5Z" clipRule="evenodd" />
+              </svg>
               <p className="font-normal text-lg text-zinc-600">Drop your first <span className="font-bold">filter</span> here.</p>
             </div>
           ) : (
