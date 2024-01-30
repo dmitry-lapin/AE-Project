@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import Select from "react-select";
 import groupedOptions from "../helpers/CustomSelect/helpers/selectData";
+import { useSelector } from "react-redux";
 
 const FilterComponent = ({ onAddFilter }) => {
   const [filter, setFilter] = useState({
@@ -31,7 +32,6 @@ const FilterComponent = ({ onAddFilter }) => {
       [name]: trimmedValue,
     });
   };
-  
 
   const handleAddFilter = () => {
     if (filter.key && filter.comparison && filter.value) {
@@ -39,7 +39,7 @@ const FilterComponent = ({ onAddFilter }) => {
         setError("Key cannot start with a number");
         return;
       }
-
+      
       onAddFilter(filter);
       setFilter({
         key: "",
@@ -54,6 +54,7 @@ const FilterComponent = ({ onAddFilter }) => {
       }, 4000);
     }
   };
+  
 
   return (
     <div className="flex flex-col space-y-2">

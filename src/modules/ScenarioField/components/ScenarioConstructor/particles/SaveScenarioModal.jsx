@@ -6,6 +6,7 @@ const SaveScenarioModal = ({ setIsModalOpen }) => {
   const filters = useSelector((state) => state.currentScenario.filters);
   const [selectedOption, setSelectedOption] = useState(null);
   const [scenarioName, setScenarioName] = useState(""); // add state for scenery name
+  const [isSaveDisabled, setIsSaveDisabled] = useState(true); // add state to disable Save button initially
 
   const closeModal = () => {
     setIsModalOpen(false);
@@ -16,6 +17,13 @@ const SaveScenarioModal = ({ setIsModalOpen }) => {
   const handleSave = () => {
     SaveScenario(selectedOption, filters, scenarioName); // send all the data to the function which gonna compile it.
     closeModal();
+  }
+
+  // Update isSaveDisabled based on the scenarioName
+  const handleScenarioNameChange = (e) => {
+    const name = e.target.value;
+    setScenarioName(name);
+    setIsSaveDisabled(name === "");
   }
 
   return (
@@ -38,22 +46,22 @@ const SaveScenarioModal = ({ setIsModalOpen }) => {
               <p>In File</p>
             </button>
           </div>
-          {selectedOption === 'In Database' && ( // Display the "Scenario name:" field only if "In Database" is selected
-          <div className="">
-            <label htmlFor="scenarioName" className="text-sm text-zinc-600 block">Scenario name:</label>
-            <input
-              type="text"
-              id="scenarioName"
-              className="w-full px-3 py-1.5 border-[1.5px] border-zinc-300 rounded-lg ring-1 ring-transparent focus:ring-blue-500 focus:outline-none focus:border-blue-500"
-              value={scenarioName}
-              onChange={(e) => setScenarioName(e.target.value)}
-            />
-          </div>
-        )}
+          {selectedOption === 'In Database' && (
+            <div className="">
+              <label htmlFor="scenarioName" className="text-sm text-zinc-600 block">Scenario name:</label>
+              <input
+                type="text"
+                id="scenarioName"
+                className="w-full px-3 py-1.5 border-[1.5px] border-zinc-300 rounded-lg ring-1 ring-transparent focus:ring-blue-500 focus:outline-none focus:border-blue-500"
+                value={scenarioName}
+                onChange={handleScenarioNameChange} // Update isSaveDisabled here
+              />
+            </div>
+          )}
         </div>
 
         <div className="flex justify-end mt-4">
-          <button className="bg-blue-500 text-white rounded-full px-4 py-1 mr-2" onClick={handleSave}>Save</button>
+          <button className={`bg-blue-500 text-white rounded-full px-4 py-1 mr-2 ${(isSaveDisabled && selectedOption == 'In Database') ? 'opacity-50 cursor-not-allowed' : ''}`} onClick={handleSave} disabled={isSaveDisabled && selectedOption == 'In Database'}>Save</button>
           <button className="text-blue-500 rounded-full px-4 py-1" onClick={closeModal}>Cancel</button>
         </div>
       </div>

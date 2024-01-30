@@ -6,7 +6,7 @@ const FiltersField = () => {
   const filters = useSelector((state) => state.filters);
 
   return (
-    <div className="flex space-x-2 p-3 bg-gray-200 border-gray-300 border rounded-lg shadow-sm">
+    <div className="flex flex-wrap p-3 bg-gray-200 border-gray-300 border rounded-lg shadow-sm">
       {filters.map((filter, index) => (
         <DraggableFilterBlock key={index} filter={filter} />
       ))}
