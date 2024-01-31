@@ -110,6 +110,6 @@ Maintaining up-to-date documentation on the current version and changes.
 # Testing
 
 I was tasked with testing a section of my application. To implement this task, I decided to use the Jest framework.
-![Screenshot of this test.](media/test.png)
+![Screenshot of this test.](./media/test.png)
 
 Thanks for your input!
